@@ -30,5 +30,16 @@ public class LogAnalyzer
          }
      }
      
+     public int countUniqueIPs(){
+         ArrayList<String> uniqueIps = new ArrayList<String>();
+         
+         for (LogEntry le : records){
+             String ip = le.getIpAddress();
+             if (!uniqueIps.contains(ip)){
+                 uniqueIps.add(ip);
+             }
+         }
+         return uniqueIps.size();
+     }
      
 }

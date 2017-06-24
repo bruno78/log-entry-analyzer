@@ -19,7 +19,17 @@ public class Tester
     
     public void testLogAnalyzer() {
         LogAnalyzer log = new LogAnalyzer();
-        log.readFile("data/short-test_log");
+        log.readFile("short-test_log");
         log.printAll();
+    }
+    
+    public void testUniqueIps() {
+        LogAnalyzer log = new LogAnalyzer();
+        log.readFile("short-test_log");
+        System.out.println("There are " + log.countUniqueIPs() + " unique IPs.");
+    }
+    
+    public void printAllHigherThanNum(int num) {
+    
     }
 }
