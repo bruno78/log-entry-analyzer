@@ -103,6 +103,62 @@ public class LogAnalyzer
     }
     
     public ArrayList<String> iPsMostVisits (HashMap<String, Integer> counts) {
+        ArrayList<String> iPsMostsVisits = new ArrayList<String>();
+        int maxVisits = mostNumberVisitsByIp(counts); 
+        for (String ip : counts.keySet()){
+            if(counts.get(ip) == maxVisits){
+                iPsMostsVisits.add(ip);
+            }
+        }
+        return iPsMostsVisits;
+    }
+    
+    private String parseAccessTime(LogEntry le){
+        String date = le.getAccessTime().toString();
+        String shortDate = date.substring(date.indexOf(" "), date.indexOf(" ")+7);
+        return shortDate;
+    }
+    
+    public HashMap<String, ArrayList<String>> iPsForDays(){
+        HashMap<String, ArrayList<String>> ipDays = 
+                new HashMap<String, ArrayList<String>>();
+        for (LogEntry le : records){
+            String date = parseAccessTime(le);
+            String ip = le.getIpAddress();
+            if(!ipDays.containsKey(date)){
+                ArrayList<String> list = new ArrayList<String>();
+                list.add(ip);
+                ipDays.put(date, list);
+            }
+            else {
+                ArrayList<String> list = ipDays.get(date);
+                list.add(ip);
+                ipDays.put(date, list);
+            }
+        }
+        return ipDays;
+    }
+    
+    public String dayWithMostIPVisits(HashMap<String, ArrayList<String>> records){
+        int mostIps = 0;
+        String date = "";
+        for (String d : records.keySet()){
+            int currVal = records.get(d).size();
+            if (currVal > mostIps){
+                mostIps = currVal;
+                date = d;
+            }
+        }
+        return date;
+    }
+    
+    public ArrayList<String> iPsWithMostVisitsOnDay(HashMap<String, ArrayList<String>> records, 
+                                                     String day){
+        ArrayList<String> ipList = records.get(day);
+        // map (HashMap) IPs into ip and occurr
+        // apply methods to calculate max
+        // verify which ips are equals to max 
+        // store into list
         
         return null;
     }

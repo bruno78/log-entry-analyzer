@@ -98,5 +98,25 @@ public class Tester
         log.readFile("short-test_log");
         HashMap<String, Integer> counts = new HashMap<String, Integer>(log.countsVisitsPerIP());
         System.out.println(log.mostNumberVisitsByIp(counts));
-    }   
+    }
+    
+    public void testIPsMostVisits(){
+        LogAnalyzer log = new LogAnalyzer();
+        log.readFile("weblog3-short_log");
+        HashMap<String, Integer> counts = new HashMap<String, Integer>(log.countsVisitsPerIP());
+        System.out.println(log.iPsMostVisits(counts));
+    }
+    
+    public void testIPsForDays(){
+        LogAnalyzer log = new LogAnalyzer();
+        log.readFile("weblog3-short_log");
+        System.out.println(log.iPsForDays());
+    }
+    
+    public void TestDayWithMostIPVisits(){
+        LogAnalyzer log = new LogAnalyzer();
+        log.readFile("weblog3-short_log");
+        HashMap<String, ArrayList<String>> ips = log.iPsForDays();
+        System.out.println(log.dayWithMostIPVisits(ips));
+    }
 }
