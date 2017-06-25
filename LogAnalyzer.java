@@ -72,6 +72,38 @@ public class LogAnalyzer
                  uniqueIps.add(ip);
              }
          }
+         for (int k = 0; k < uniqueIps.size(); k++){
+             System.out.println(uniqueIps.get(k));
+         }
          return uniqueIps.size();
+    }
+    
+    public HashMap<String, Integer> countsVisitsPerIP(){
+        HashMap<String, Integer> counts = new HashMap<String, Integer>();
+        for (LogEntry le : records){
+            String ip = le.getIpAddress();
+            if (!counts.containsKey(ip)){
+                counts.put(ip, 1);
+            }
+            else {
+                counts.put(ip, counts.get(ip)+1);
+            }
+        }
+        return counts;
+    }
+    
+    public int mostNumberVisitsByIp(HashMap<String, Integer> counts){
+        int maxVisitNum = 0;
+        for (String ip : counts.keySet()){
+            if(counts.get(ip) > maxVisitNum){
+                maxVisitNum = counts.get(ip);
+            }
+        }
+        return maxVisitNum;
+    }
+    
+    public ArrayList<String> iPsMostVisits (HashMap<String, Integer> counts) {
+        
+        return null;
     }
 }
