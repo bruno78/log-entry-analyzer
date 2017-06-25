@@ -72,9 +72,6 @@ public class LogAnalyzer
                  uniqueIps.add(ip);
              }
          }
-         for (int k = 0; k < uniqueIps.size(); k++){
-             System.out.println(uniqueIps.get(k));
-         }
          return uniqueIps.size();
     }
     
@@ -115,7 +112,7 @@ public class LogAnalyzer
     
     private String parseAccessTime(LogEntry le){
         String date = le.getAccessTime().toString();
-        String shortDate = date.substring(date.indexOf(" "), date.indexOf(" ")+7);
+        String shortDate = date.substring(date.indexOf(" ")+1, date.indexOf(" ")+7);
         return shortDate;
     }
     
@@ -152,14 +149,27 @@ public class LogAnalyzer
         return date;
     }
     
-    public ArrayList<String> iPsWithMostVisitsOnDay(HashMap<String, ArrayList<String>> records, 
-                                                     String day){
-        ArrayList<String> ipList = records.get(day);
-        // map (HashMap) IPs into ip and occurr
-        // apply methods to calculate max
-        // verify which ips are equals to max 
-        // store into list
-        
-        return null;
+    public ArrayList<String> iPsWithMostVisitsOnDay(String day, 
+                                            HashMap<String, ArrayList<String>> records){
+        if(records.containsKey(day)){
+            ArrayList<String> ipList = records.get(day);
+            // map (HashMap) IPs into ip and occurr
+            HashMap<String, Integer>ipFreqs = new HashMap<String, Integer>();
+            for (String ip : ipList){
+                if(!ipFreqs.containsKey(ip)){
+                    ipFreqs.put(ip, 1);
+                }
+                else {
+                    ipFreqs.put(ip, ipFreqs.get(ip)+1);
+                }
+            }
+            // apply methods to calculate max
+            // verify which ips are equals to max 
+            // store into list
+            return iPsMostVisits(ipFreqs);
+        } else {
+            System.out.println("Day not found");
+            return null;
+        } 
     }
 }
