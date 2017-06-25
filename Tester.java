@@ -23,13 +23,51 @@ public class Tester
         log.printAll();
     }
     
-    public void testUniqueIps() {
+    public void testUniqueIps() {  
         LogAnalyzer log = new LogAnalyzer();
         log.readFile("short-test_log");
         System.out.println("There are " + log.countUniqueIPs() + " unique IPs.");
     }
     
-    public void printAllHigherThanNum(int num) {
-    
+    public void testPrintAllHigherThanNum() {
+        LogAnalyzer log = new LogAnalyzer();
+        log.readFile("short-test_log");
+        log.printAllHigherThanNum(201);
     }
+    
+    public void testUniqueIpVisitsOnDay(){
+        LogAnalyzer log = new LogAnalyzer();
+        log.readFile("weblog-short_log");
+        String date = "Sep 14";
+        ArrayList<String> uniqueIPVisitsOnDay = new ArrayList<String>(log.uniqueIPVisitsOnDay(date));
+        System.out.println("The number of visits on " + date + " were: " + uniqueIPVisitsOnDay.size());
+        System.out.println("These visits were ");
+        for (String visit : uniqueIPVisitsOnDay){
+            System.out.println(visit);
+        }
+        date = "Sep 30";
+        uniqueIPVisitsOnDay = new ArrayList<String>(log.uniqueIPVisitsOnDay(date));
+        System.out.println("The number of visits on " + date + " were: " + uniqueIPVisitsOnDay.size());
+        System.out.println("These visits were ");
+        for (String visit : uniqueIPVisitsOnDay){
+            System.out.println(visit);
+        }
+    }
+    
+    public void testCountUniqueIPsInRange(){
+        LogAnalyzer log = new LogAnalyzer();
+        log.readFile("short-test_log");
+        int low = 200;
+        int high = 299;
+        System.out.println("Unique IPs in range between " + low + " and " + high + 
+                " are: " + log.countUniqueIPsInRange(low,high));
+        
+        log.readFile("short-test_log");
+        low = 300;
+        high = 399;
+        System.out.println("Unique IPs in range between " + low + " and " + high + 
+                " are: " + log.countUniqueIPsInRange(low,high));
+    }
+    
+    
 }
